@@ -1,11 +1,11 @@
 /* --- Base Font Styles --- */
 /* Titles */
-h1, h2, h3, h4 {
-    font-family: 'Sorts Mill Goudy', serif;
+h1, h2, h4 {
+    font-family: 'Playfair Display', serif;
 }
 
   /* Body Text */
-  body, p {
+  body, p, h3 {
     font-family: 'Poppins', serif;
     font-weight: 400;
     line-height: 1.7;
