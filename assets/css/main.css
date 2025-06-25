@@ -1,0 +1,353 @@
+/* --- Base Font Styles --- */
+/* Titles */
+h1, h2, h3, h4 {
+    font-family: 'Sorts Mill Goudy', serif;
+}
+
+  /* Body Text */
+  body, p {
+    font-family: 'Poppins', serif;
+    font-weight: 400;
+    line-height: 1.7;
+  }
+  @font-face {
+    font-family: 'Sorts Mill Goudy';
+    src: url('assets/fonts/SortsMillGoudy-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  .animated-wave-separator {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    position: relative;
+    height: 60px;
+    margin: 0;
+  }
+  
+  .animated-wave-separator svg {
+    display: block;
+    width: calc(150% + 1.3px); /* wider for looping effect */
+    height: 100%;
+    animation: waveLoop 6s linear infinite;
+  }
+  
+  .animated-wave-separator path {
+    fill: #00b4d8;
+  }
+  
+  @keyframes waveLoop {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-25%);
+    }
+  }
+  .artistic-separator {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+  
+  .artistic-separator svg {
+    width: 100%;
+    height: 80px;
+  }
+  
+  .artistic-separator path {
+    fill: #fca311;
+  }
+  .ribbon-separator svg {
+    width: 100%;
+    height: 100px;
+    animation: waveShift 4s ease-in-out infinite alternate;
+  }
+  
+  .ribbon-separator path {
+    fill: #7209b7;
+  }
+  
+  @keyframes waveShift {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-40px); }
+  }
+  
+/* --- Reset and Base Styles --- */  
+/* --- Global Variables for a Simple Theme (can be expanded) --- */
+:root {
+    --primary-color: #007bff; /* A nice blue */
+    --secondary-color: #6c757d; /* Grey */
+    --text-color-light: #343a40; /* Dark grey text on light backgrounds */
+    --text-color-dark: #374766; /* Light text on dark backgrounds */
+    --background-light: #f8f9fa; /* Light background */
+    --background-dark: #0f172a; /* Dark blue-slate background */
+    --border-radius-base: 5px;
+    --box-shadow-base: rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s ease;
+}
+
+/* --- Header & Navigation Styles (Glassmorphism) --- */
+.main-header-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100; /* High z-index to stay on top */
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed), border-color var(--transition-speed);
+    background-color: rgba(255, 255, 255, 0.3); /* Initial light glass effect base */
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Light border */
+}
+
+.main-header-wrapper.scrolled {
+    background-color: rgba(255, 255, 255, 0.95); /* More opaque on scroll */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.15); /* Slightly more visible border on scroll */
+}
+
+#mobile-menu {
+    background-color: rgba(255, 255, 255, 0.98); /* Ensure light background for mobile menu */
+}
+
+/* Nav link active state (example, can be controlled by JS) */
+.nav-active {
+    color: #ea580c; /* Tailwind orange-600 */
+    font-weight: 600;
+}
+
+/* --- Section Backgrounds --- */
+#design-portfolio-content,
+#programming-portfolio-content {
+    background-color: var(--background-dark); /* Dark background for portfolio sections */
+    color: var(--text-color-dark); /* Light text on dark background */
+}
+
+/* --- Buttons --- */
+/* (Styles already inlined with Tailwind, but adding a base for consistency if needed) */
+.button-base { /* Example, not used directly by your HTML, but good for reference */
+    padding: 12px 25px;
+    border: none;
+    border-radius: var(--border-radius-base);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.collapsible-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    display: none; /* Start hidden */
+}
+
+.collapsible-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+    display: block; /* Show when visible */
+}
+
+/* Specific adjustment for works-section visibility */
+#works-section.visible {
+    max-height: 100vh; /* Adjust for works section if it needs to fill viewport */
+}
+
+
+/* --- Portfolio Split Panel Hover Effects (Works Section) --- */
+.portfolio-split > div {
+    flex: 1;
+    transition: flex 0.5s ease-in-out, filter 0.3s ease-in-out, transform 0.4s ease-in-out;
+}
+.portfolio-split > div:hover {
+    transform: translateY(-10px);
+    z-index: 5;
+}
+@media (min-width: 768px) {
+    .portfolio-split:hover > div:not(:hover) {
+        flex: 0.5;
+        filter: brightness(0.9);
+    }
+}
+
+/* --- Project Cards (within Design/Programming Portfolio sections) --- */
+.project-card {
+    height: 100%;
+    transition: all var(--transition-speed);
+    overflow: hidden;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+}
+
+.project-image {
+    height: 200px; /* Fixed height for image containers */
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.project-image svg {
+    transition: all 0.5s ease;
+}
+
+.project-card:hover .project-image svg {
+    transform: scale(1.05); /* Slight zoom on image hover */
+}
+
+/* Specific text color for project titles in dark sections */
+#design-portfolio-content .project-card h3,
+#programming-portfolio-content .project-card h3 {
+    transition: color var(--transition-speed);
+}
+#design-portfolio-content .project-card:hover h3,
+#programming-portfolio-content .project-card:hover h3 {
+    color: white; /* Change to white on hover for dark backgrounds */
+}
+
+/* --- Profile Photo and Animated Role Text (About Section) --- */
+
+/* Profile Photo Container with Hover Effects */
+.profile-photo-container {
+    width: 192px; /* Tailwind h-48 */
+    height: 192px; /* Tailwind w-48 */
+    overflow: hidden;
+    position: relative;
+    border-radius: 9999px; /* rounded-full */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+    border: 3px solid #1e293b; /* border-[3px] border-slate-800 */
+    transition: all 0.5s ease-in-out;
+}
+
+.profile-photo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top; /* Initially show only the upper part */
+    filter: blur(5px); /* Apply blur initially */
+    transition: all 0.5s ease-in-out;
+    transform: scale(1.1); /* Slightly zoom in to aid the cropping effect */
+}
+
+.profile-photo-container:hover {
+    transform: scale(1.05); /* Slight zoom on hover for the container */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* More prominent shadow on hover */
+}
+
+.profile-photo-container:hover img {
+    object-position: center center; /* Show full image on hover */
+    filter: blur(0px); /* Remove blur on hover */
+    transform: scale(1); /* Return to normal scale */
+}
+
+/* Animated Role Text Container */
+.role-text-animation-container {
+    height: 2.5rem; /* Equivalent to text-3xl height for overflow */
+    overflow: hidden;
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-role-text, .hover-role-text {
+    display: block;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    white-space: nowrap;
+    line-height: inherit;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+
+.main-role-text {
+    position: relative; /* Maintain flow for initial visibility */
+}
+
+.hover-role-text {
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: translateY(100%); /* Start below the main text */
+    background: linear-gradient(to right, #0ea5e9, #f59e0b); /* Sky-Amber gradient */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; /* Makes the text transparent so gradient shows */
+}
+
+.role-text-animation-container:hover .main-role-text {
+    opacity: 0;
+    transform: translateY(-100%); /* Move main role text up and out of view */
+}
+
+.role-text-animation-container:hover .hover-role-text {
+    opacity: 1;
+    transform: translateY(0); /* Move hover role text into view */
+}
+
+/* Glassmorphism card for skills on About Me page */
+.glassmorphism-card {
+    background: rgba(30, 41, 59, 0.5); /* Semi-transparent background (slate-800 equivalent with transparency) */
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-color-dark); /* Ensure text is light on this card */
+}
+
+/* --- Background Canvas Animation --- */
+#background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* --- General Animations (GSAP target classes) --- */
+/* Basic fade in up animation */
+@keyframes fade-in-up-keyframe { /* Renamed to avoid conflict with potential JS animation */
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up-initial { /* For elements that animate immediately on load */
+    animation: fade-in-up-keyframe 0.8s ease-out forwards;
+}
+/* Floating animations */
+@keyframes float-smooth {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+.animate-float-smooth {
+    animation: float-smooth 4s ease-in-out infinite;
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Stagger animation delays for elements using GSAP */
+.animation-delay-0 { animation-delay: 0s; }
+.animation-delay-100 { animation-delay: 0.1s; }
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-400 { animation-delay: 0.4s; }
+.animation-delay-500 { animation-delay: 0.5s; }
+.animation-delay-600 { animation-delay: 0.6s; }
+/* Add more as needed */
+
+/* Project card individual fade-in */
+@keyframes fade-in-project {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.project-card-animation {
+    animation: fade-in-project 0.8s ease-out forwards;
+    opacity: 0; /* Start hidden */
+}
+/* This will be handled by GSAP ScrollTrigger to stagger */
