@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Mohamed Slimani</title>
+    <!-- Google Fonts: Poppins (for body text), Playfair Display (for headings), Montserrat & Kalam (secondary) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Manrope:wght@400;600&family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@600;800&family=Montserrat:wght@400;500;600;700;800;900&family=Kalam:wght@400;700&display=swap" rel="stylesheet">    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Base font styles using Poppins for general text */
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            background-color: #0f172a; /* Dark blue-slate background for the entire page */
+            scroll-behavior: smooth;
+            color: #f3f4f6; /* Light text for dark background */
+        }
+        /* Playfair Display for headings and specific serif elements */
+        h1, h2, .font-serif {
+            font-family: '', serif;
+        }
+        /* Kalam for script-style elements */
+        .font-script {
+            font-family: 'Kalam', cursive;
+        }
+
+        /* Styles for mobile menu background, ensuring it's light */
+        #mobile-menu {
+            background-color: rgba(255, 255, 255, 0.95); /* Ensure light background for mobile menu */
+        }
+        /* Style for active navigation link */
+        .nav-active {
+            color: #ea580c; /* Tailwind orange-600 */
+            font-weight: 600;
+        }
+
+        /* Styles for animated text logo in header */
+        .animated-text-logo {
+            background: linear-gradient(to right, #0d9488, #0ea5e9, #f59e0b); /* Teal-Sky-Amber gradient */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent; /* Makes the text transparent so background gradient shows */
+            font-size: 2.25rem; /* text-2xl md:text-4xl */
+            line-height: 2.5rem; /* leading-10 */
+            font-weight: 800; /* font-extrabold */
+            transition: all 0.3s ease-in-out;
+            animation: gradient-shift 5s ease-in-out infinite alternate;
+        }
+        .main-header-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.3); /* Initial light glass effect base */
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Light border */
+        }
+        /* Header style when scrolled */
+        .main-header-wrapper.scrolled {
+            background-color: rgba(255, 255, 255, 0.95); /* More opaque on scroll */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-color: rgba(0, 0, 0, 0.15); /* Slightly more visible border on scroll */
+        }
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* Ensure logo size is consistent */
+        .logo-header.animated-text-logo {
+            height: auto; /* Allow height to adjust to text */
+            padding: 0.5rem 0; /* Add some vertical padding for aesthetics */
+            display: inline-block; /* Needed for background-clip to work */
+        }
+
+        /* Glassmorphism card for skills on About Me page */
+        .glassmorphism-card {
+            background: rgba(30, 41, 59, 0.5); /* Semi-transparent background (slate-800 equivalent with transparency) */
+            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- New/Updated Styles for Profile Photo and Role Animation --- */
+
+        /* Profile Photo Container with Hover Effects */
+        .profile-photo-container {
+            width: 192px; /* h-48 equivalent */
+            height: 192px; /* w-48 equivalent */
+            overflow: hidden; /* Crucial for cropping the image */
+            position: relative;
+            border-radius: 9999px; /* rounded-full */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl from previous */
+            border: 3px solid #1e293b; /* border-[3px] border-slate-800 from previous */
+            transition: all 0.5s ease-in-out; /* Smooth transition for hover effects */
+            /* Removed display: inline-block here as parent flexbox handles centering */
+        }
+
+        .profile-photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top; /* Initially show only the upper part */
+            filter: blur(5px); /* Apply blur initially */
+            transition: all 0.5s ease-in-out; /* Smooth transition for image properties */
+            transform: scale(1.1); /* Slightly zoom in to aid the cropping effect */
+        }
+
+        .profile-photo-container:hover {
+            transform: scale(1.05); /* Slight zoom on hover for the container */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* More prominent shadow on hover */
+        }
+
+        .profile-photo-container:hover img {
+            object-position: center center; /* Show full image on hover */
+            filter: blur(0px); /* Remove blur on hover */
+            transform: scale(1); /* Return to normal scale */
+        }
+
+        /* Animated Role Text Container */
+        .role-text-animation-container {
+            height: 2.5rem; /* Equivalent to text-3xl height for overflow */
+            overflow: hidden; /* Hides the part of the text that is not currently visible */
+            position: relative; /* Crucial for absolute positioning of children */
+            display: block; /* Ensures it takes its own line and can be centered with margin auto */
+            margin-left: auto; /* Centers the block element */
+            margin-right: auto; /* Centers the block element */
+            /* Removed vertical-align: middle as it's not applicable for display: block */
+        }
+
+        .main-role-text, .hover-role-text {
+            display: block; /* Each role text on its own line within the container */
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out; /* Smooth transition for movement and fade */
+            white-space: nowrap; /* Prevent text wrapping */
+            line-height: inherit; /* Ensure consistent line height */
+            /* For absolute positioning, define top/left for hover-role-text */
+            position: absolute;
+            width: 100%; /* Ensure it spans the container's width */
+            text-align: center; /* Center the text within the absolute element */
+        }
+
+        .main-role-text {
+            position: relative; /* Maintain flow for initial visibility */
+        }
+
+        .hover-role-text {
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transform: translateY(100%); /* Start below the main text */
+            background: linear-gradient(to right, #0ea5e9, #f59e0b); /* Sky-Amber gradient */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent; /* Makes the text transparent so gradient shows */
+        }
+
+        .role-text-animation-container:hover .main-role-text {
+            opacity: 0;
+            transform: translateY(-100%); /* Move main role text up and out of view */
+        }
+        .logo-header.animated-text-logo {
+            height: auto; /* Allow height to adjust to text */
+            padding: 0.5rem 0; /* Add some vertical padding for aesthetics */
+            display: inline-block; /* Needed for background-clip to work */
+        }
+        .role-text-animation-container:hover .hover-role-text {
+            opacity: 1;
+            transform: translateY(0); /* Move hover role text into view */
+        }
+
+    </style>
+</head>
+<body class="pt-24">
+
+    <!-- Main Header / Navigation Wrapper -->
+    <header class="main-header-wrapper">
+        <div class="max-w-screen-2xl mx-auto px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-4 md:space-x-0">
+                <!-- Mobile Menu Button (Hamburger Icon) - Visible on mobile, order 1 -->
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-300 " aria-label="Open mobile menu" title="Open mobile menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+                <!-- Logo - Replaced with animated text -->
+                <a href="#hero" class="logo-header animated-text-logo transform transition duration-300 hover:scale-105 ml-4 md:ml-0">
+                    <img src="ms3.png" alt="Mohamed Slimani Logo" class="h-16 w-auto">
+                </a>
+            </div>
+
+            <!-- Desktop Navigation Menu -->
+            <nav class="hidden md:flex flex-wrap justify-center gap-4">
+                <ul id="desktop-nav-menu" class="flex flex-wrap justify-center gap-4">
+                    <li>
+                        <a href="#hero" class="px-6 py-3 text-sm font-semibold text-gray-800 hover:text-amber-500 rounded-full transition-all duration-300">
+                            HOME
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#about" class="px-6 py-3 text-sm font-semibold text-gray-700 hover:text-amber-500 rounded-full transition-all duration-300">
+                            ABOUT ME
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#works-section" id="works-link" class="px-6 py-3 text-sm font-semibold text-gray-700 hover:text-amber-500 rounded-full transition-all duration-300">
+                            WORKS
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#article-section" class="px-6 py-3 text-sm font-semibold text-gray-700 hover:text-amber-500 rounded-full transition-all duration-300">
+                            ARTICLE
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#contact-section" class="px-6 py-3 text-sm font-semibold text-gray-700 hover:text-amber-500 rounded-full transition-all duration-300">
+                            CONTACT
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden mt-2 rounded-lg py-4 border-t border-gray-200 mobile-nav-menu">
+            <ul class="flex flex-col items-center space-y-3">
+                <li><a href="#hero" class="block w-full text-center py-2 text-gray-700 hover:bg-gray-200 rounded-lg transition duration-300" onclick="hideMobileMenuAndScroll('#hero');">HOME</a></li>
+                <li><a href="#about" class="block w-full text-center py-2 text-gray-600 hover:bg-gray-200 rounded-lg transition duration-300" onclick="hideMobileMenuAndScroll('#about');">ABOUT ME</a></li>
+                <li><a href="#works-section" class="block w-full text-center py-2 text-gray-600 hover:bg-gray-200 rounded-lg transition duration-300" onclick="hideMobileMenuAndScroll('#works-section');">WORKS</a></li>
+                <li><a href="#article-section" class="block w-full text-center py-2 text-gray-600 hover:bg-gray-200 rounded-lg transition duration-300" onclick="hideMobileMenuAndScroll('#article-section');">ARTICLE</a></li>
+                <li><a href="#contact-section" class="block w-full text-center py-2 text-gray-600 hover:bg-gray-200 rounded-lg transition duration-300" onclick="hideMobileMenuAndScroll('#contact-section');">CONTACT</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content for About Me Page -->
+    <main class="min-h-[calc(100vh-6rem)] flex flex-col justify-center py-10 px-4 text-white">
+        <!-- Content will take up max-width and be auto-centered -->
+        <div class="max-w-5xl mx-auto">
+            <!-- Header: Photo and Introduction -->
+            <div class="text-center md:text-left md:flex md:items-center md:gap-12 mb-16">
+                <!-- Profile Photo with Blur and Reveal on Hover -->
+                <div class="flex-shrink-0 mb-8 md:mb-0 mx-auto md:mx-0">
+                    <div class="profile-photo-container">
+                        <img src="maphoto.jpg" alt="Mohamed Slimani - Profile Photo">
+                    </div>
+                </div>
+                
+                <div class="pt-20 md:pt-0">
+                    <h1 class="text-5xl font-bold mb-2 font-serif">Hi, I'm Mohamed Slimani</h1>
+                    
+                    <!-- Animated Title: Full Stack Developer / Creative Designer -->
+                    <div class="role-text-animation-container text-lg md:text-3xl font-extrabold font-serif text-teal-300">
+                        <span class="main-role-text">Full Stack Developer</span>
+                        <span class="hover-role-text">Creative Designer</span>
+                    </div>
+
+                    <p class="text-gray-400 flex items-center justify-center md:justify-start gap-2 text-sm mt-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                        </svg>
+                        Montreal, QC, Canada
+                    </p>
+                </div>
+            </div>
+
+            <!-- Main Content: Bio and Skills -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 pt-16 text-left">
+                <!-- Left Column: Bio / My Story -->
+                <div class="md:col-span-2">
+                    <h3 class="text-3xl font-bold mb-4 font-serif">My Story</h3>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        From my first "Hello, World!" to building complex, scalable applications, my journey in software development has been driven by a relentless curiosity and a passion for turning ideas into reality. I thrive on the challenge of solving complex problems and am dedicated to writing clean, efficient, and maintainable code.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed">
+                        I am particularly interested in the intersection of backend performance and user-facing design, striving to create applications that are not only powerful under the hood but also intuitive and enjoyable to use.
+                    </p>
+                </div>
+
+                <!-- Right Column: Skills -->
+                <div class="md:col-span-1">
+                    <div class="glassmorphism-card p-6 rounded-lg">
+                        <h3 class="text-lg md:text-2xl font-bold mb-6 font-serif">Technical Skills</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="text-lg font-semibold text-teal-300 mb-2">Languages</h4>
+                                <ul class="flex flex-wrap gap-2">
+                                    <li class="bg-slate-700 text-sm px-3 py-1 rounded-full">JavaScript</li>
+                                    <li class="bg-slate-700 text-sm px-3 py-1 rounded-full">Python</li>
+                                    <li class="bg-slate-700 text-sm px-3 py-1 rounded-full">HTML5 & CSS3</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-teal-300 mb-2">Frameworks</h4>
+                                <ul class="flex flex-wrap gap-2">
+                                    <li class="bg-slate-700 text-sm px-3 py-1 rounded-full">React</li>
+                                    <li class="bg-slate-700 text-sm px-3 py-1 rounded-full">Node.js</li>
+                                    <li class="bg-slate-700 text-sm px-3 py-1 rounded-full">Flask</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-teal-300 mb-2">Tools</h4>
+                                <ul class="flex flex-wrap gap-2">
+                                    <li class="bg-slate-700 text-sm px-3 py-1 rounded-full">Git & GitHub</li>
+                                    <li class="bg-slate-700 text-sm px-3 py-1 rounded-full">Docker</li>
+                                    <li class="bg-slate-700 text-sm px-3 py-1 rounded-full">PostgreSQL</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-6 text-center bg-gray-900 text-gray-400">
+        <p class="text-sm">&copy; 2024 Mohamed Slimani</p>
+    </footer>
+
+    <script>
+        // Get references to DOM elements
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mainHeaderWrapper = document.querySelector('.main-header-wrapper');
+
+        // Toggle mobile menu visibility
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Header background effect on scroll
+        window.addEventListener("scroll", function () {
+            if (window.scrollY > 30) {
+                mainHeaderWrapper.classList.add("scrolled");
+            } else {
+                mainHeaderWrapper.classList.remove("scrolled");
+            }
+        });
+    </script>
+</body>
+</html>
