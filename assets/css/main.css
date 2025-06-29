@@ -1,8 +1,22 @@
+:root {
+  --primary-color: #007bff; /* A nice blue */
+  --secondary-color: #6c757d; /* Grey */
+  --text-color-light: #343a40; /* Dark grey text on light backgrounds */
+  --text-color-dark: #374766; /* Light text on dark backgrounds */
+  --background-light: #f8f9fa; /* Light background */
+  --background-dark: #0f172a; /* Dark blue-slate background */
+  --border-radius-base: 5px;
+  --box-shadow-base: rgba(0, 0, 0, 0.1);
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.4s ease;
+  --transition-slow: 1.4s cubic-bezier(0.19, 1, 0.22, 1);} 
+
 /* --- Base Font Styles --- */
 /* Titles */
-h1, h2, h4 {
+h1, h4 {
     font-family: 'Playfair Display', serif;
 }
+
 
   /* Body Text */
   body, p, h3 {
@@ -10,6 +24,11 @@ h1, h2, h4 {
     font-weight: 400;
     line-height: 1.7;
   }
+  h2 {
+    font-family: 'Sorts Mill Goudy', serif;
+    font-weight: 600;
+    line-height: 1.5;
+  }	
   @font-face {
     font-family: 'Sorts Mill Goudy';
     src: url('assets/fonts/SortsMillGoudy-Regular.ttf') format('truetype');
@@ -32,9 +51,18 @@ h1, h2, h4 {
     height: 100%;
     animation: waveLoop 6s linear infinite;
   }
-  
-  .animated-wave-separator path {
-    fill: #00b4d8;
+
+  .icon-wrapper {
+    transition: opacity 0.4s ease;
+    pointer-events: none; /* évite que l'icône bloque les clics */
+  }
+  @keyframes fly-1 {
+    from {
+      transform: translateY(0.1em);
+    }
+    to {
+      transform: translateY(-0.1em);
+    }
   }
   
   @keyframes waveLoop {
@@ -45,6 +73,8 @@ h1, h2, h4 {
       transform: translateX(-25%);
     }
   }
+  
+  
   .artistic-separator {
     width: 100%;
     overflow: hidden;
@@ -56,9 +86,7 @@ h1, h2, h4 {
     height: 80px;
   }
   
-  .artistic-separator path {
-    fill: #fca311;
-  }
+
   .ribbon-separator svg {
     width: 100%;
     height: 100px;
@@ -73,23 +101,7 @@ h1, h2, h4 {
     0% { transform: translateX(0); }
     100% { transform: translateX(-40px); }
   }
-  
-/* --- Reset and Base Styles --- */  
-/* --- Global Variables for a Simple Theme (can be expanded) --- */
-:root {
-    --primary-color: #007bff; /* A nice blue */
-    --secondary-color: #6c757d; /* Grey */
-    --text-color-light: #343a40; /* Dark grey text on light backgrounds */
-    --text-color-dark: #374766; /* Light text on dark backgrounds */
-    --background-light: #f8f9fa; /* Light background */
-    --background-dark: #0f172a; /* Dark blue-slate background */
-    --border-radius-base: 5px;
-    --box-shadow-base: rgba(0, 0, 0, 0.1);
-    --transition-speed: 0.3s ease;
-}
-
-/* --- Header & Navigation Styles (Glassmorphism) --- */
-.main-header-wrapper {
+  .main-header-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -101,6 +113,8 @@ h1, h2, h4 {
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Light border */
 }
+
+
 
 .main-header-wrapper.scrolled {
     background-color: rgba(255, 255, 255, 0.95); /* More opaque on scroll */
@@ -136,12 +150,222 @@ h1, h2, h4 {
     cursor: pointer;
     transition: all var(--transition-speed);
 }
+.button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 36px;
+  border: 4px solid;
+  border-color: transparent;
+  font-size: 16px;
+  background-color: inherit;
+  border-radius: 100px;
+  font-weight: 600;
+  color: #5c9685;
+  box-shadow: 0 0 0 2px #5c9685;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.button svg {
+  position: absolute;
+  width: 24px;
+  fill: rgba(92, 150, 133, 0);
+  z-index: 9;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.button .arr-1 {
+  right: 16px;
+}
+
+.button .arr-2 {
+  left: -25%;
+}
+
+.button .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.button .text {
+  position: relative;
+  z-index: 1;
+  transform: translateX(-12px);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.button:hover {
+  box-shadow: 0 0 0 12px transparent;
+  color: #fedbae;
+  border-radius: 12px;
+}
+
+.button:hover .arr-1 {
+  right: -25%;
+}
+
+.button:hover .arr-2 {
+  left: 16px;
+}
+
+.button:hover .text {
+  transform: translateX(12px);
+}
+
+.button:hover svg {
+  fill: #fedbae;
+}
+
+.button:active {
+  scale: 0.95;
+  box-shadow: 0 0 0 4px #fedbae;
+}
+
+.button:hover .circle {
+  width: 220px;
+  height: 220px;
+  opacity: 1;
+}
+
+/* Animated Button Styles */
+.animated-button {
+  position: relative;
+  display: inline-flex;
+  height: 3.5rem;
+  align-items: center;
+  border-radius: 9999px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fafaf6;
+  letter-spacing: -0.06em;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.animated-button-bg {
+  overflow: hidden;
+  border-radius: 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(1);
+  transition: transform 1.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.animated-button-bg-layers {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  top: -60%;
+  aspect-ratio: 1 / 1;
+  width: max(200%, 10rem);
+}
+
+.animated-button-bg-layer {
+  border-radius: 9999px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(0);
+}
+
+.animated-button-bg-layer.-purple {
+  background-color: rgba(163, 116, 255);
+}
+
+.animated-button-bg-layer.-turquoise {
+  background-color: rgba(23, 241, 209);
+}
+
+.animated-button-bg-layer.-yellow {
+  background-color: rgba(255, 208, 116);
+}
+
+.animated-button-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.animated-button-inner-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: translateY(70%);
+}
+
+/* Hover effects */
+.animated-button:hover .animated-button-inner-static {
+  opacity: 0;
+  transform: translateY(-70%);
+  transition: transform 1.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s linear;
+}
+
+.animated-button:hover .animated-button-inner-hover {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 1.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 1.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.animated-button:hover .animated-button-bg-layer {
+  transition: transform 1.3s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s linear;
+}
+
+.animated-button:hover .animated-button-bg-layer-1 {
+  transform: scale(1);
+}
+
+.animated-button:hover .animated-button-bg-layer-2 {
+  transition-delay: 0.1s;
+  transform: scale(1);
+}
+
+.animated-button:hover .animated-button-bg-layer-3 {
+  transition-delay: 0.2s;
+  transform: scale(1);
+}
+@keyframes fly-1 {
+  from {
+    transform: translateY(0.1em);
+  }
+  to {
+    transform: translateY(-0.1em);
+  }
+}
 
 .collapsible-section {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease, transform 0.8s ease;
     display: none; /* Start hidden */
+}
+.works-button-text::before {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 16px;
+  background-color: currentColor;
+  margin-right: 8px;
+  transform: rotate(-25deg);
 }
 
 .collapsible-section.visible {
@@ -150,26 +374,23 @@ h1, h2, h4 {
     display: block; /* Show when visible */
 }
 
-/* Specific adjustment for works-section visibility */
-#works-section.visible {
-    max-height: 100vh; /* Adjust for works section if it needs to fill viewport */
+/* Replace the existing works-section styles with: */
+#works-section {
+  transform-origin: top;
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+  transform: scaleY(0);
+  pointer-events: none;
 }
 
+#works-section.opacity-100 {
+  opacity: 1;
+  transform: scaleY(1);
+  pointer-events: auto;
+}
 
-/* --- Portfolio Split Panel Hover Effects (Works Section) --- */
-.portfolio-split > div {
-    flex: 1;
-    transition: flex 0.5s ease-in-out, filter 0.3s ease-in-out, transform 0.4s ease-in-out;
-}
-.portfolio-split > div:hover {
-    transform: translateY(-10px);
-    z-index: 5;
-}
-@media (min-width: 768px) {
-    .portfolio-split:hover > div:not(:hover) {
-        flex: 0.5;
-        filter: brightness(0.9);
-    }
+#works-section-placeholder {
+  transition: height 0.5s ease-in-out;
 }
 
 /* --- Project Cards (within Design/Programming Portfolio sections) --- */
@@ -208,6 +429,31 @@ h1, h2, h4 {
 }
 
 /* --- Profile Photo and Animated Role Text (About Section) --- */
+
+
+button:hover {
+  color: #ffffff;
+  transform: scale(1.1);
+  outline: 2px solid #60897e;
+  box-shadow: 4px 5px 17px -4px #60897e;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: #60897e;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
+}
+
+button:hover::before {
+  width: 250%;
+}
 
 /* Profile Photo Container with Hover Effects */
 .profile-photo-container {
@@ -315,6 +561,12 @@ h1, h2, h4 {
 .fade-in-up-initial { /* For elements that animate immediately on load */
     animation: fade-in-up-keyframe 0.8s ease-out forwards;
 }
+
+/* SVG drop shadow filter */
+.separator-shadow {
+    filter: drop-shadow(0 -8px 12px rgba(0, 0, 0, 0.15));
+}
+
 /* Floating animations */
 @keyframes float-smooth {
     0%, 100% { transform: translateY(0); }
@@ -340,6 +592,19 @@ h1, h2, h4 {
 .animation-delay-500 { animation-delay: 0.5s; }
 .animation-delay-600 { animation-delay: 0.6s; }
 /* Add more as needed */
+  @keyframes shine {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-shine {
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
+    animation: shine 1.2s ease-in-out forwards;
+  }
 
 /* Project card individual fade-in */
 @keyframes fade-in-project {
