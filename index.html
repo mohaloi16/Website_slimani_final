@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mohamed Slimani - Portfolio</title>
-    
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
     <!-- Google Fonts: Cormorant Garamond and Manrope -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,13 +13,44 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            animation: {
+              'float': 'float 6s ease-in-out infinite',
+              'fade-in-up': 'fadeInUp 1s ease-out forwards',
+              'pulse-slow': 'pulse 4s ease-in-out infinite'
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
+              fadeInUp: {
+                '0%': { opacity: 0, transform: 'translateY(20px)' },
+                '100%': { opacity: 1, transform: 'translateY(0)' },
+              },
+            },
+          }
+        }
+      }
+    </script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        AOS.init();
+      });
+    </script>
 </head>
-<body class="text-gray-800">
-    <a href="#hero" class="sr-only focus:not-sr-only">Skip to main content</a>
+<body class="bg-stone-100 text-stone-800">
+  <a href="#hero" class="sr-only focus:not-sr-only">Skip to main content</a>
     <canvas id="background-canvas"></canvas>
-    <header class="main-header-wrapper">
-        <div class="max-w-screen-2xl mx-auto px-6 py-3">
-            <div class="flex items-center justify-between">
+    <header class="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur shadow-sm">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
                     <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100" aria-label="Open menu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -41,139 +69,176 @@
                     </ul>
                 </nav>
             </div>
+            
             <div id="mobile-menu" class="hidden md:hidden mt-2 rounded-lg py-4 border-t border-gray-200">
-                <ul class="flex flex-col items-center space-y-3">
-                    <li><a href="#hero" class="nav-link block w-full text-center py-2 text-gray-700 hover:bg-gray-200 rounded-lg">HOME</a></li>
-                    <li><a href="#about" class="nav-link block w-full text-center py-2 text-gray-600 hover:bg-gray-200 rounded-lg">ABOUT ME</a></li>
-                    <li><a href="#works-section" class="nav-link block w-full text-center py-2 text-gray-600 hover:bg-gray-200 rounded-lg">WORKS</a></li>
-                    <li><a href="#article-section" class="nav-link block w-full text-center py-2 text-gray-600 hover:bg-gray-200 rounded-lg">ARTICLE</a></li>
-                    <li><a href="#contact-section" class="nav-link block w-full text-center py-2 text-gray-600 hover:bg-gray-200 rounded-lg">CONTACT</a></li>
-                </ul>
+              <ul class="space-y-1">
+                <li>
+                  <a href="#hero" class="flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200">
+                    <!-- Home Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5 opacity-75 shadow-sm" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l9-9 9 9M4 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3m-4 0v-4a1 1 0 011-1h2a1 1 0 011 1v4" />
+                    </svg>
+                    <span class="text-sm font-medium">Home</span>
+                  </a>
+                </li>
+              
+                <li>
+                  <a href="#about" class="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                    <!-- About Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5 opacity-75 shadow-sm" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A3 3 0 018.293 17h7.414a3 3 0 013.172.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span class="text-sm font-medium">About Me</span>
+                  </a>
+                </li>
+              
+                <li>
+                  <a href="#works-section" class="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                    <!-- Works Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5 opacity-75 shadow-sm" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                    </svg>
+                    <span class="text-sm font-medium">Works</span>
+                  </a>
+                </li>
+              
+                <li>
+                  <a href="#article-section" class="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                    <!-- Article Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5 opacity-75 shadow-sm" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4 5h16M4 10h16M4 15h16M4 20h16" />
+                    </svg>
+                    <span class="text-sm font-medium">Article</span>
+                  </a>
+                </li>
+              
+                <li>
+                  <a href="#contact-section" class="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                    <!-- Contact Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5 opacity-75 shadow-sm" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 10a3.38 3.38 0 01-1.016 2.438A3.38 3.38 0 0117.5 13H6.5a3.38 3.38 0 01-2.484-1.016A3.38 3.38 0 013 10V6.5A3.5 3.5 0 016.5 3h11A3.5 3.5 0 0121 6.5V10z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 19h18M3 19v2h18v-2" />
+                    </svg>
+                    <span class="text-sm font-medium">Contact</span>
+                  </a>
+                </li>
+              </ul>
+              
             </div>
         </div>
     </header>
 
+
     <main role="main">
-        <section id="hero" class="min-h-screen flex flex-col justify-center items-center py-10 px-4 pt-32 md:pt-40">
-            <div class="text-center max-w-3xl">
-                <p class="tracking-widest uppercase text-sm  text-teal-700">Bienvenue</p>
+        <!-- Hero Section -->
+        <section id="hero" class="pt-48 min-h-[140vh] flex flex-col justify-center items-center text-center bg-gradient-to-b from-amber-100 to-orange-200">
+          <div class="text-center max-w-3xl">
+                <p class="tracking-widest uppercase text-sm text-teal-700">Bienvenue</p>
                 <span class="block w-16 h-0.5 bg-gray-700 mx-auto mt-2"></span>
-<div class="mt-10 flex justify-center gsap-zoom-in">
-  <div class="relative w-auto h-auto">
-    <!-- SVG container for the clipped image -->
-    <svg width="300" height="300" viewBox="0 0 300 300" class="w-full h-full object-cover animate-float-smooth transition duration-500 ease-in-out hover:saturate-150 hover:brightness-110 hover:contrast-125 shadow-lg">
-      <defs>
-        <!-- Define a clipPath with an irregular, splash-like shape -->
-        <clipPath id="splashBrushClip">
-          <!-- This path defines the "splash brush" shape. You can modify 'd' attribute
-               to create different irregular patterns. -->
-          <path d="M150,10 C200,0 290,50 290,150 C290,250 200,300 150,290 C100,300 10,250 10,150 C10,50 100,0 150,10 Z" />
-        </clipPath>
-      </defs>
-      <!-- The actual image, clipped by the defined splashBrushClip path -->
-      <image
-        href="/assets/images/Pre.png"
-        x="0"
-        y="0"
-        width="100%"
-        height="100%"
-        clip-path="url(#splashBrushClip)"
-        onerror="this.onerror=null;this.href='https://placehold.co/300x300/e0f7fa/1f2937?text=MS';"
-      />
-    </svg>
-  </div>
-</div>
+                <div class="mt-10 flex justify-center gsap-zoom-in">
+                    <div class="relative w-auto h-auto">
+                        <img src="/assets/images/pre.png" alt="Photo de profil Mohamed Slimani"
+                             class="w-full h-full object-cover animate-float-smooth transition duration-500 ease-in-out hover:saturate-100 hover:brightness-10 hover:contrast-125" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/300x300/e0f7fa/1f2937?text=MS';">
+                    </div>
+                </div>
+                
                 <h1 id="hero-title" class="text-5xl md:text-6xl mt-10 mb-4 gsap-fade-in-up text-center">
                     <img
                     src="/assets/images/hello.png" 
                     alt="Texte Hello Mohamed Slimani" 
                     class="inline-block h-[4em] transition-transform duration-300 ease-in-out hover:scale-110 hover:rotate-1"/>
-                  </h1>
-                  <div id="hero-button" class="gsap-fade-in-up">
-                    <button id="show-works-btn"
-                      class="relative inline-flex items-center justify-center gap-3 px-8 py-3 rounded-full border border-[#0f766e] text-[#0f766e] font-semibold text-base md:text-xl overflow-hidden transition-all duration-300 group hover:text-white">
-                  
-                      <!-- Hover background -->
-                      <span class="absolute inset-0 bg-gradient-to-r from-[#0f172a] to-[#0f766e] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out rounded-full z-0"></span>
-                  
-                      <!-- Glow -->
-                      <span class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full z-0"></span>
-                  
-                      <!-- Text + Icon -->
-                      <span class="relative z-10 flex items-center gap-2">
-                        <span id="works-button-text">VIEW MY WORKS</span>
-                        <svg id="works-button-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                      </span>
-                    </button>
-                  </div>
-                  
-                  
+                </h1>
+                <div id="button" class="gsap-fade-in-up flex justify-center">
+                  <button id="show-works-btn" class="button">
+                    <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                      ></path>
+                    </svg>
+                    <span class="text" id="works-button-text">EXPLORE MY SKILLS</span>
+                    <span class="circle"></span>
+                    <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
         </section>
-<div class="section-separator orange-separator -mb-1" data-aos="fade-up" data-aos-offset="150">
-  <svg class="w-full h-40 md:h-56 transform scale-y-[-1] opacity-60" viewBox="0 0 1440 320"
-    xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-    <defs>
-      <linearGradient id="designWave" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#fbbf24" />
-        <stop offset="100%" stop-color="#f97316" />
-      </linearGradient>
-    </defs>
-    <path fill="url(#designWave)"
-      d="M0,64L60,74.7C120,85,240,107,360,128C480,149,600,171,720,165.3C840,160,960,128,1080,106.7C1200,85,1320,75,1380,69.3L1440,64L1440,0L0,0Z" />
-  </svg>
+        
+        <div class="relative z-10">
+        <div class="absolute top-0 left-0 w-full overflow-hidden transform rotate-180 leading-none pointer-events-none">
+          <svg class="w-full h-24 md:h-32" viewBox="0 0 1440 320" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="heroToDesignGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#fef3c7" /> <!-- Light beige to match hero -->
+                <stop offset="100%" stop-color="#fed7aa" />
+              </linearGradient>
+            </defs>
+            <path fill="url(#heroToDesignGradient)" 
+            d="M0,160 C480,240 960,80 1440,160 L1440,320 L0,320 Z" 
+            class="hero-separator-shadow"
+          />
+        </svg>
+        </div>
+      </div>
+        <section id="works-section" class="hidden opacity-0w-full transition-all duration-500 transform origin-top opacity-0 scale-y-0 pointer-events-none">
+        <div id="design-panel"
+    onclick="location.href='/design-projects'"
+    class="relative mt-24 z-0 pt-2 bg-gradient-to-br from-amber-400 via-orange-400 to-amber-600 text-white p-8 flex flex-col justify-center items-center text-center cursor-pointer hover:scale-105 transition-transform duration-300">
+
+    <div class="max-w-sm">
+        <div class="flex justify-center items-center mb-6">
+            <img src="/assets/images/logodp.png" alt="Design Logo"
+                class="h-32 w-auto transition-transform duration-500 ease-in-out hover:scale-110 hover:rotate-1" />
+        </div>
+        <p class="mb-8 text-white/90">Découvrez mes travaux créatifs incluant le design graphique, l'UI/UX et les projets d'arts visuels.</p>
+        <button
+        onclick="location.href='/code-projects'"
+        class="mt-8 px-8 py-3 rounded-full border-2 border-white text-white font-semibold text-lg bg-gradient-to-r from-amber-200 to-orange-200 shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 hover:text-white hover:bg-gradient-to-r hover:from-amber-300 hover:to-orange-300">
+        Voir les projets de design
+      </button>
+    </div>
 </div>
-      <section id="works-section"
-  class="hidden transition-all duration-500 transform origin-top opacity-0 scale-y-0 pointer-events-none
-         bg-gradient-to-b from-amber-400/60 via-white/5 to-teal-700/60 backdrop-blur-md border-y border-white/10 shadow-inner rounded-xl">
-              <!-- DESIGN PANEL -->
-              <div id="design-panel" role="button" tabindex="0" aria-pressed="false"
-                class="bg-gradient-to-br from-amber-400 via-orange-400 to-amber-600 text-white p-8 flex flex-col justify-center items-center text-center cursor-pointer hover:brightness-105 transition duration-300 focus:outline-none focus:ring-4 focus:ring-amber-300">
-                <div class="max-w-sm">
-                  <div class="flex justify-center items-center mb-6">
-                    <img src="/assets/images/logodp.png" alt="Design Logo"
-                      class="h-32 w-auto transition-transform duration-500 ease-in-out hover:scale-110 hover:rotate-1" />
-                  </div>
-                  <p class="mb-8 text-white/90">Découvrez mes travaux créatifs incluant le design graphique, l'UI/UX et les projets d'arts visuels.</p>
-                  <button
-                    class="relative z-10 px-6 py-2 rounded-full font-semibold text-white bg-gradient-to-r from-white/10 via-white/20 to-white/10 hover:from-white hover:to-white hover:text-amber-600 border border-white transition-all duration-300 backdrop-blur-sm shadow-md hover:shadow-lg">
-                    Voir les projets de design
-                  </button>
-                </div>
-              </div>
-          
-              <!-- CODING PANEL -->
-              <div id="programming-panel" role="button" tabindex="0" aria-pressed="false"
-                class="bg-gradient-to-br from-slate-800 via-cyan-800 to-teal-700 text-white p-8 flex flex-col justify-center items-center text-center cursor-pointer hover:brightness-105 transition duration-300 focus:outline-none focus:ring-4 focus:ring-slate-300">
-                <div class="max-w-sm">
-                  <div class="flex justify-center items-center mb-6">
-                    <img src="/assets/images/LOGOCP.png" alt="Coding Logo"
-                      class="h-32 w-auto transition-transform duration-500 ease-in-out hover:scale-110 hover:rotate-1" />
-                  </div>
-                  <p class="mb-8 text-white/90">Explorez mes projets techniques, de la conception de sites web aux applications logicielles complexes.</p>
-                  <button
-                    class="relative z-10 px-6 py-2 rounded-full font-semibold text-white bg-gradient-to-r from-white/10 via-white/20 to-white/10 hover:from-white hover:to-white hover:text-slate-800 border border-white transition-all duration-300 backdrop-blur-sm shadow-md hover:shadow-lg">
-                    Voir les projets de code
-                  </button>
-                </div>
-              </div>
-          
-            </div>
-          </section>
-<div class="section-separator green-separator -mt-1" data-aos="fade-down" data-aos-offset="150">
-  <svg class="w-full h-40 md:h-56 opacity-60" viewBox="0 0 1440 320"
-    xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-    <defs>
-      <linearGradient id="codeWave" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#0f766e" />
-        <stop offset="100%" stop-color="#0ea5e9" />
-      </linearGradient>
-    </defs>
-    <path fill="url(#codeWave)"
-      d="M0,64L60,90.7C120,117,240,171,360,186.7C480,203,600,181,720,154.7C840,128,960,96,1080,101.3C1200,107,1320,149,1380,170.7L1440,192L1440,0L0,0Z" />
-  </svg>
+<div id="programming-panel" class="bg-gradient-to-br from-[#0e7490] via-[#0f766e] to-[#172554] text-white p-8 flex flex-col justify-center items-center text-center cursor-default">
+  <div class="max-w-sm">
+    <div class="flex justify-center items-center mb-6">
+      <img src="/assets/images/LOGOCP.png" alt="Coding Logo" 
+           class="h-32 w-auto transition-transform duration-500 ease-in-out hover:scale-110 hover:rotate-1" />
+    </div>
+    <p class="mb-8 text-white/90">Explorez mes projets techniques, de la conception de sites web aux applications logicielles complexes.</p>
+    <button onclick="location.href='/code-projects'" class="animated-button programming-button">
+      <div class="animated-button-bg">
+        <div class="animated-button-bg-layers">
+          <div class="animated-button-bg-layer animated-button-bg-layer-1 -teal"></div>
+          <div class="animated-button-bg-layer animated-button-bg-layer-2 -blue"></div>
+          <div class="animated-button-bg-layer animated-button-bg-layer-3 -indigo"></div>
+        </div>
+      </div>
+      <div class="animated-button-inner">
+        <span class="animated-button-inner-static">Voir les projets de code</span>
+        <span class="animated-button-inner-hover">Voir les projets de code</span>
+      </div>
+    </button>
+  </div>
 </div>
+        </section>
+
+        <div class="w-full overflow-hidden leading-none">
+          <svg class="w-full h-24 md:h-32 transform rotate-180" viewBox="0 0 1440 320" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="blueBottomGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#172554" />
+                <stop offset="100%" stop-color="#0f766e" />
+              </linearGradient>
+            </defs>
+            <path fill="url(#blueBottomGradient)" d="M0,160 C480,240 960,80 1440,160 L1440,320 L0,320 Z"></path>
+          </svg>
+        </div>
+        
+
+        <!-- About Section -->
         <section id="about" class="py-20 px-4 bg-indigo-50/0">
             <div class="max-w-4xl mx-auto text-center gsap-fade-in-up">
                 <img 
@@ -183,8 +248,8 @@
                 drop-shadow-full max-w-[0_8px_8px_rgba(0,0,0,0.2)] 
                 transition duration-700 ease-in-out
                 hover:invert hover:grayscale hover:scale-105 hover:drop-shadow-full"
-       />
-       <p class="text-gray-700 leading-relaxed text-lg mb-8">
+                />
+                <p class="text-gray-700 leading-relaxed text-lg mb-8">
                     Je suis un développeur Full-Stack et un designer passionné avec une solide expérience en création d'applications web robustes et d'expériences utilisateur intuitives. Mon parcours m'a permis de maîtriser un large éventail de technologies, du front-end au back-end, tout en affinant mes compétences en design graphique et UI/UX. J'aime résoudre des problèmes complexes et construire des solutions élégantes qui ont un impact réel.
                 </p>
                 <div class="grid md:grid-cols-2 gap-8 text-left">
@@ -193,8 +258,8 @@
                             <img src="assets/images/ct2.png" 
                                 alt="Compétences Techniques Mohamed Slimani" 
                                 class="h-[190px] transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:rotate-3" />
-                            </h3>
-                            <ul class="space-y-3 text-gray-600">
+                        </h3>
+                        <ul class="space-y-3 text-gray-600">
                             <li class="flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>Développement Web (React, Next.js, Node.js)</li>
                             <li class="flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>Bases de Données (PostgreSQL, MongoDB, Firebase)</li>
                             <li class="flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>Cloud Computing (AWS, GCP)</li>
@@ -217,327 +282,98 @@
                 </div>
             </div>
         </section>
-  
-        <section id="design-portfolio-content" class="collapsible-section">
-            <div class="container mx-auto px-6 py-12">
-                <div class="flex justify-center mb-12 gsap-fade-in-up">
-                    <img src="/assets/images/nvlogo.png" alt="Logo Portfolio Design Mohamed Slimani" class="h-32 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/150x150/0f172a/FFFFFF?text=Logo';">
+
+        <!-- Article Section -->
+        <div class="w-full overflow-hidden leading-none opacity-60" data-aos="fade-up" data-aos-duration="1000">
+            <svg class="w-full h-24 md:h-32" viewBox="0 0 1440 320" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="warmArticleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#fde68a" stop-opacity="0.5" />
+                  <stop offset="100%" stop-color="#fca5a5" stop-opacity="0.5" />
+                </linearGradient>
+              </defs>
+              <path 
+                fill="url(#warmArticleGradient)" 
+                d="M0,160 C360,80 1080,240 1440,160 L1440,320 L0,320 Z" 
+              />
+            </svg>
+        </div>
+
+        <section id="article-section" class="py-24 px-4 relative z-20 bg-[rgba(255,235,200,0.2)]">
+            <div class="max-w-4xl mx-auto text-center" data-aos="fade-up" data-aos-duration="1000">
+                <!-- Heading -->
+                <div class="flex justify-center mb-6" data-aos="fade-up" data-aos-duration="1000">
+                    <img
+                        src="/assets/images/article.png"
+                        alt="Latest Articles"
+                        class="w-64 md:w-80 transform transition duration-500 hover:scale-105 hover:rotate-1"
+                    />
                 </div>
-                <div class="flex justify-between items-center mb-8 gsap-fade-in-up">
-                    <button class="back-btn group flex items-center overflow-hidden bg-gray-700 hover:bg-gray-600 text-white font-semibold  py-2 px-2 rounded-full transition-all duration-300 w-10 hover:w-36" data-type="design">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-                        <span class="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm whitespace-nowrap">Go Back</span>
-                    </button>
-                    <a href="#hero" class="home-btn group flex items-center overflow-hidden bg-gray-700 hover:bg-gray-600 text-white font-semibold  py-2 px-2 rounded-full transition-all duration-300 w-10 hover:w-32">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l9-9 9 9M4 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3m-4 0v-4a1 1 0 011-1h2a1 1 0 011 1v4" /></svg>
-                        <span class="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm whitespace-nowrap">Home</span>
-                    </a>
-                </div>
-                <!-- Image avec effet lumineux au survol -->
-                <img src="/assets/images/dp.png"
-                alt="Bannière Portfolio Design Mohamed Slimani"
-                class="max-w-md h-auto mx-auto transition duration-700 ease-in-out hover:brightness-125 hover:drop-shadow-xl hover:scale-105"
-                onerror="this.onerror=null;this.src='https://placehold.co/600x200/D4AF37/0A192F?text=Design+Showcase';">
-                <!-- Texte de présentation -->
-                <p class="text-center text-lg md:text-base text-gray-800 dark:text-gray-200 mt-6 px-4 max-w-2xl mx-auto leading-relaxed">
-                    Bienvenue dans mon univers de design. Découvrez une sélection de projets visuels alliant créativité, esthétisme et innovation, allant du branding à l'édition, en passant par l'UI/UX et l'illustration numérique.
+
+                <!-- Subheading -->
+                <p class="text-lg md:text-xl text-gray-700 leading-relaxed font-light">
+                    Stay tuned for insights on <span class="text-[#0f766e] font-medium">web development</span>,
+                    <span class="text-[#0f766e] font-medium">design trends</span>, and
+                    <span class="text-[#0f766e] font-medium">emerging technologies</span>.
                 </p>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
-                    <!-- Project 1 -->
-                    <a href="#" class="project-card block bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 animate-fade-in animate-delay-1">
-                        <div class="project-image rounded-lg shadow-md mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full rounded-lg">
-                                <rect width="800" height="600" fill="#1e293b" />
-                                <circle cx="400" cy="300" r="150" fill="#334155" />
-                                <path d="M320,220 L480,220 L480,380 L320,380 Z" fill="#475569" />
-                                <circle cx="400" cy="300" r="50" fill="#fbbf24" />
-                                <path d="M300,250 L500,250 L500,350 L300,350 Z" fill="none" stroke="#fbbf24" stroke-width="5" />
-                                <circle cx="350" cy="270" r="10" fill="#fbbf24" />
-                                <circle cx="450" cy="270" r="10" fill="#fbbf24" />
-                            </svg>
-                        </div>
-                        <h3 class="text-base md:text-xl font-semibold  mb-2 text-amber-400">Brand Identity Design</h3>
-                        <p class="text-gray-400 text-sm">Complete brand identity for a tech startup, including logo, color palette, and guidelines.</p>
-                    </a>
-                    
-                    <!-- Project 2 -->
-                    <a href="#" class="project-card block bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 animate-fade-in animate-delay-2">
-                        <div class="project-image rounded-lg shadow-md mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full rounded-lg">
-                                <rect width="800" height="600" fill="#1e293b" />
-                                <rect x="200" y="100" width="400" height="400" fill="#334155" rx="20" ry="20" />
-                                <rect x="250" y="150" width="300" height="50" fill="#475569" rx="5" ry="5" />
-                                <rect x="250" y="220" width="300" height="30" fill="#64748b" rx="5" ry="5" />
-                                <rect x="250" y="270" width="300" height="30" fill="#64748b" rx="5" ry="5" />
-                                <rect x="250" y="320" width="300" height="30" fill="#64748b" rx="5" ry="5" />
-                                <circle cx="280" cy="400" r="20" fill="#fbbf24" />
-                                <circle cx="340" cy="400" r="20" fill="#fbbf24" />
-                                <circle cx="400" cy="400" r="20" fill="#fbbf24" />
-                            </svg>
-                        </div>
-                        <h3 class="text-base md:text-xl font-semibold  mb-2 text-amber-400">UI/UX Design Project</h3>
-                        <p class="text-gray-400 text-sm">Interface and experience design for a mobile app focused on health and wellness tracking.</p>
-                    </a>
-                    
-                    <!-- Project 3 -->
-                    <a href="#" class="project-card block bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 animate-fade-in animate-delay-3">
-                        <div class="project-image rounded-lg shadow-md mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full rounded-lg">
-                                <rect width="800" height="600" fill="#1e293b" />
-                                <rect x="100" y="150" width="600" height="300" fill="#334155" />
-                                <rect x="150" y="200" width="200" height="200" fill="#475569" />
-                                <rect x="400" y="200" width="250" height="50" fill="#64748b" />
-                                <rect x="400" y="275" width="250" height="50" fill="#64748b" />
-                                <path d="M150,200 L350,200 L350,400 L150,400 Z" fill="none" stroke="#fbbf24" stroke-width="5" />
-                                <circle cx="250" cy="300" r="50" fill="#fbbf24" opacity="0.7" />
-                                <rect x="400" y="350" width="100" height="50" fill="#fbbf24" />
-                            </svg>
-                        </div>
-                        <h3 class="text-base md:text-xl font-semibold  mb-2 text-amber-400">Marketing Campaign</h3>
-                        <p class="text-gray-400 text-sm">Comprehensive campaign design including social media assets, banners, and promotional materials.</p>
-                    </a>
-                    
-                    <!-- Project 4 -->
-                    <a href="#" class="project-card block bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 animate-fade-in animate-delay-4">
-                        <div class="project-image rounded-lg shadow-md mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full rounded-lg">
-                                <rect width="800" height="600" fill="#1e293b" />
-                                <rect x="100" y="100" width="600" height="400" fill="#334155" />
-                                <rect x="150" y="150" width="500" height="50" fill="#475569" />
-                                <rect x="150" y="220" width="200" height="230" fill="#64748b" />
-                                <rect x="370" y="220" width="280" height="100" fill="#64748b" />
-                                <rect x="370" y="340" width="280" height="110" fill="#64748b" />
-                                <rect x="150" y="150" width="100" height="50" fill="#fbbf24" />
-                                <circle cx="470" cy="270" r="30" fill="#fbbf24" opacity="0.8" />
-                                <rect x="420" y="380" width="180" height="30" fill="#fbbf24" opacity="0.6" />
-                            </svg>
-                        </div>
-                        <h3 class="text-base md:text-xl font-semibold  mb-2 text-amber-400">Website Redesign</h3>
-                        <p class="text-gray-400 text-sm">Complete overhaul of an e-commerce website with improved user experience and conversion optimization.</p>
-                    </a>
-                    
-                    <!-- Project 5 -->
-                    <a href="#" class="project-card block bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 animate-fade-in animate-delay-5">
-                        <div class="project-image rounded-lg shadow-md mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full rounded-lg">
-                                <rect width="800" height="600" fill="#1e293b" />
-                                <rect x="250" y="150" width="300" height="300" fill="#334155" />
-                                <path d="M250,150 L550,150 L550,450 L250,450 Z" fill="none" stroke="#fbbf24" stroke-width="5" />
-                                <rect x="300" y="200" width="200" height="200" fill="#475569" />
-                                <path d="M300,200 L500,200 L500,400 L300,400 Z" fill="none" stroke="#fbbf24" stroke-width="3" />
-                                <circle cx="400" cy="300" r="50" fill="#fbbf24" opacity="0.5" />
-                                <rect x="350" y="350" width="100" height="20" fill="#fbbf24" />
-                            </svg>
-                        </div>
-                        <h3 class="text-base md:text-xl font-semibold  mb-2 text-amber-400">Product Packaging</h3>
-                        <p class="text-gray-400 text-sm">Innovative packaging design for a premium consumer electronics product line with sustainability focus.</p>
-                    </a>
-                    
-                    <!-- Project 6 -->
-                    <a href="#" class="project-card block bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 animate-fade-in animate-delay-6">
-                        <div class="project-image rounded-lg shadow-md mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full rounded-lg">
-                                <rect width="800" height="600" fill="#1e293b" />
-                                <circle cx="200" cy="200" r="80" fill="#334155" />
-                                <circle cx="400" cy="200" r="80" fill="#475569" />
-                                <circle cx="600" cy="200" r="80" fill="#64748b" />
-                                <circle cx="200" cy="400" r="80" fill="#64748b" />
-                                <circle cx="400" cy="400" r="80" fill="#334155" />
-                                <circle cx="600" cy="400" r="80" fill="#475569" />
-                                <circle cx="200" cy="200" r="40" fill="#fbbf24" opacity="0.8" />
-                                <circle cx="400" cy="200" r="30" fill="#fbbf24" opacity="0.6" />
-                                <circle cx="600" cy="200" r="20" fill="#fbbf24" opacity="0.4" />
-                                <circle cx="600" cy="400" r="40" fill="#fbbf24" opacity="0.8" />
-                                <circle cx="400" cy="400" r="30" fill="#fbbf24" opacity="0.6" />
-                                <circle cx="200" cy="400" r="20" fill="#fbbf24" opacity="0.4" />
-                            </svg>
-                        </div>
-                        <h3 class="text-base md:text-xl font-semibold  mb-2 text-amber-400">Motion Graphics</h3>
-                        <p class="text-gray-400 text-sm">Animated explainer videos and motion graphics for a SaaS company's product launch campaign.</p>
-                    </a>
+
+                <!-- Article Preview Card with low opacity -->
+                <div
+                class="mt-12 bg-white/70 backdrop-blur-md rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 ease-in-out p-8 max-w-2xl mx-auto group relative overflow-hidden"
+                data-aos="zoom-in-up"
+                data-aos-delay="200"
+                >
+                    <div class="absolute -top-10 -left-10 w-40 h-40 bg-gradient-to-tr from-[#0f766e]/20 to-[#0ea5e9]/30 rounded-full blur-2xl opacity-40 pointer-events-none group-hover:opacity-60 transition-opacity duration-300"></div>
+
+                    <p class="text-base md:text-lg text-gray-800 font-medium leading-relaxed">
+                        📝 <em>This section is coming soon!</em> You'll find in-depth articles on UX/UI,
+                        performance, full-stack best practices, and design workflow optimization.
+                    </p>
                 </div>
             </div>
         </section>
 
-
-        <section id="programming-portfolio-content" class="collapsible-section">
-            <div class="mx-auto px-6 py-12">
-                <div class="flex justify-center mb-12 gsap-fade-in-up">
-                    <img src="/assets/images/slimdev.png" alt="Logo Portfolio Coding Mohamed Slimani" class="h-32 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/150x150/0f172a/FFFFFF?text=Logo';">
-                </div>
-                <div class="flex justify-between items-center mb-8 gsap-fade-in-up">
-                    <button class="back-btn group flex items-center overflow-hidden bg-gray-700 hover:bg-gray-600 text-white font-semibold  py-2 px-2 rounded-full transition-all duration-300 w-10 hover:w-36" data-type="programming">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-                        <span class="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm whitespace-nowrap">Go Back</span>
-                    </button>
-                    <a href="#hero" class="home-btn group flex items-center overflow-hidden bg-gray-700 hover:bg-gray-600 text-white font-semibold  py-2 px-2 rounded-full transition-all duration-300 w-10 hover:w-32">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l9-9 9 9M4 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3m-4 0v-4a1 1 0 011-1h2a1 1 0 011 1v4" /></svg>
-                        <span class="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm whitespace-nowrap">Home</span>
-                    </a>
-                </div>
-                <img src="/assets/images/pp.png" alt="Bannière Portfolio Coding Mohamed Slimani" class="max-w-2xl h-auto mb-12 mx-auto gsap-zoom-in" onerror="this.onerror=null;this.src='https://placehold.co/800x300/14b8a6/FFFFFF?text=Coding+Showcase';">
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
-                    <!-- Project 1 -->
-                    <a href="#" class="project-card block bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 animate-fade-in animate-delay-1">
-                        <div class="project-image rounded-lg shadow-md mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full rounded-lg">
-                                <rect width="800" height="600" fill="#1e293b" />
-                                <rect x="100" y="100" width="600" height="400" fill="#334155" rx="10" ry="10" />
-                                <rect x="150" y="150" width="200" height="200" fill="#475569" rx="5" ry="5" />
-                                <rect x="400" y="150" width="250" height="80" fill="#64748b" rx="5" ry="5" />
-                                <rect x="400" y="250" width="250" height="30" fill="#94a3b8" rx="5" ry="5" />
-                                <rect x="400" y="300" width="150" height="30" fill="#5eead4" rx="5" ry="5" />
-                                <rect x="150" y="380" width="500" height="70" fill="#475569" rx="5" ry="5" />
-                            </svg>
-                        </div>
-                        <h3 class="text-base md:text-xl font-semibold  mb-2 text-teal-300">E-commerce Platform</h3>
-                        <p class="text-gray-400 text-sm">Full-stack e-commerce platform with product management, user authentication, and payment processing.</p>
-                    </a>
-                    
-                    <!-- Project 2 -->
-                    <a href="#" class="project-card block bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 animate-fade-in animate-delay-2">
-                        <div class="project-image rounded-lg shadow-md mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full rounded-lg">
-                                <rect width="800" height="600" fill="#1e293b" />
-                                <rect x="200" y="100" width="400" height="400" fill="#334155" rx="20" ry="20" />
-                                <rect x="250" y="150" width="300" height="50" fill="#475569" rx="5" ry="5" />
-                                <circle cx="400" cy="300" r="80" fill="#5eead4" opacity="0.8" />
-                                <rect x="250" y="400" width="300" height="50" fill="#64748b" rx="5" ry="5" />
-                                <rect x="320" y="470" width="160" height="15" fill="#94a3b8" rx="7.5" ry="7.5" />
-                            </svg>
-                        </div>
-                        <h3 class="text-base md:text-xl font-semibold  mb-2 text-teal-300">Mobile App Development</h3>
-                        <p class="text-gray-400 text-sm">Cross-platform mobile app for task management with cloud synchronisation and offline capabilities.</p>
-                    </a>
-                    
-                    <!-- Project 3 -->
-                    <a href="#" class="project-card block bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 animate-fade-in animate-delay-3">
-                        <div class="project-image rounded-lg shadow-md mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full rounded-lg">
-                                <rect width="800" height="600" fill="#1e293b" />
-                                <path d="M400,100 L600,250 L400,400 L200,250 Z" fill="#334155" />
-                                <circle cx="400" cy="250" r="80" fill="#475569" />
-                                <path d="M350,220 L450,220 L450,280 L350,280 Z" fill="#5eead4" />
-                                <rect x="200" y="420" width="400" height="80" fill="#64748b" rx="5" ry="5" />
-                                <rect x="250" y="440" width="300" height="15" fill="#94a3b8" rx="7.5" ry="7.5" />
-                                <rect x="250" y="465" width="200" height="15" fill="#94a3b8" rx="7.5" ry="7.5" />
-                            </svg>
-                        </div>
-                        <h3 class=""text-base md:text-xl font-semibold  mb-2 text-teal-300">Cybersecurity Tool</h3>
-                        <p class="text-gray-400 text-sm">Security analysis tool for identifying vulnerabilities in web applications with detailed reporting.</p>
-                    </a>
-                    
-                    <!-- Project 4 -->
-                    <a href="#" class="project-card block bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 animate-fade-in animate-delay-4">
-                        <div class="project-image rounded-lg shadow-md mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full rounded-lg">
-                                <rect width="800" height="600" fill="#1e293b" />
-                                <rect x="150" y="150" width="500" height="300" fill="#334155" rx="10" ry="10" />
-                                <circle cx="250" cy="250" r="50" fill="#5eead4" opacity="0.8" />
-                                <rect x="350" y="200" width="250" height="20" fill="#64748b" rx="5" ry="5" />
-                                <rect x="350" y="240" width="200" height="20" fill="#94a3b8" rx="5" ry="5" />
-                                <rect x="350" y="280" width="150" height="20" fill="#94a3b8" rx="5" ry="5" />
-                                <rect x="350" y="320" width="100" height="30" fill="#5eead4" rx="5" ry="5" />
-                            </svg>
-                        </div>
-                        <h3 class="text-base md:text-xl font-semibold  mb-2 text-teal-300">Data Analytics Dashboard</h3>
-                        <p class="text-gray-400 text-sm">Interactive dashboard for visualizing complex data sets with customizable charts and real-time updates.</p>
-                    </a>
-                    
-                    <!-- Project 5 -->
-                    <a href="#" class="project-card block bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 animate-fade-in animate-delay-5">
-                        <div class="project-image rounded-lg shadow-md mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full rounded-lg">
-                                <rect width="800" height="600" fill="#1e293b" />
-                                <rect x="100" y="150" width="600" height="300" fill="#334155" rx="10" ry="10" />
-                                <rect x="150" y="200" width="200" height="200" fill="#475569" rx="5" ry="5" />
-                                <rect x="400" y="200" width="250" height="50" fill="#64748b" rx="5" ry="5" />
-                                <rect x="400" y="275" width="250" height="50" fill="#64748b" rx="5" ry="5" />
-                                <rect x="400" y="350" width="150" height="50" fill="#5eead4" rx="5" ry="5" />
-                            </svg>
-                        </div>
-                        <h3 class="text-base md:text-xl font-semibold  mb-2 text-teal-300">AI Content Generator</h3>
-                        <p class="text-gray-400 text-sm">Machine learning tool that creates high-quality content for blogs, social media, and marketing materials.</p>
-                    </a>
-                    
-                    <!-- Project 6 -->
-                    <a href="#" class="project-card block bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 animate-fade-in animate-delay-6">
-                        <div class="project-image rounded-lg shadow-md mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="w-full h-full rounded-lg">
-                                <rect width="800" height="600" fill="#1e293b" />
-                                <circle cx="400" cy="300" r="200" fill="#334155" />
-                                <path d="M400,150 L450,250 L550,250 L470,320 L500,420 L400,360 L300,420 L330,320 L250,250 L350,250 Z" fill="#5eead4" opacity="0.8" />
-                                <circle cx="400" cy="300" r="50" fill="#475569" />
-                                <rect x="250" y="450" width="300" height="50" fill="#64748b" rx="10" ry="10" />
-                            </svg>
-                        </div>
-                        <h3 class="text-base md:text-xl font-semibold  mb-2 text-teal-300">Blockchain Solution</h3>
-                        <p class="text-gray-400 text-sm">Decentralized application with smart contracts for secure and transparent digital transactions.</p>
-                    </a>
-                </div>
-            </div>
-        </section>
         <div class="w-full overflow-hidden leading-none">
             <svg class="w-full h-24 md:h-32" viewBox="0 0 1440 320" preserveAspectRatio="none">
               <defs>
-                <linearGradient id="customDiagonalGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#e0f2f1" />
-                  <stop offset="100%" stop-color="#bae6fd" />
+                <linearGradient id="aboutArticleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#e5e7eb" />
+                  <stop offset="100%" stop-color="#5eead4" />
                 </linearGradient>
               </defs>
-              <path fill="url(#customDiagonalGradient)" d="M0,160 L1440,0 L1440,320 L0,320 Z" />
+              <path fill="url(#aboutArticleGradient)" d="M0,160 C480,240 960,80 1440,160 L1440,320 L0,320 Z" />
             </svg>
-          </div>
-           
-          <section id="article-section" class="py-24 px-4 bg-gray-100 relative z-20">
-            <div class="max-w-4xl mx-auto text-center" data-aos="fade-up" data-aos-duration="1000">
-              <!-- Heading -->
-            <div class="mb-8" data-aos="zoom-in" data-aos-duration="800">
-  <img
-    src="assets/images/article.png"
-    alt="Latest Articles"
-    class="mx-auto h-32 md:h-48 object-contain"
-  />
-</div>
-              <!-- Subheading -->
-              <p class="text-lg md:text-xl text-gray-600 leading-relaxed font-light">
-                Stay tuned for insights on <span class="text-[#0f766e] font-medium">web development</span>,
-                <span class="text-[#0f766e] font-medium">design trends</span>, and
-                <span class="text-[#0f766e] font-medium">emerging technologies</span>.
-              </p>
-          
-              <!-- Article Preview Card -->
-              <div
-                class="mt-12 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 ease-in-out p-8 max-w-2xl mx-auto group relative overflow-hidden"
-                data-aos="zoom-in-up"
-                data-aos-delay="200"
-              >
-                <div class="absolute -top-10 -left-10 w-40 h-40 bg-gradient-to-tr from-[#0f766e]/20 to-[#0ea5e9]/30 rounded-full blur-2xl opacity-40 pointer-events-none group-hover:opacity-60 transition-opacity duration-300"></div>
-          
-                <p class="text-base md:text-lg text-gray-800 font-medium leading-relaxed">
-                  📝 <em>This section is coming soon!</em> You’ll find in-depth articles on UX/UI,
-                  performance, full-stack best practices, and design workflow optimization.
-                </p>
-              </div>
+        </div>
+   
+        <!-- Skills Dashboard Section -->
+        <section id="skills" class="py-20 md:py-28 bg-white">
+          <div class="max-w-4xl mx-auto text-center" data-aos="fade-up" data-aos-duration="1000">
+            <!-- Heading -->
+            <div class="flex justify-center mb-6" data-aos="fade-up" data-aos-duration="1000">
+                <img
+                    src="/assets/images/Skills.png"
+                    alt="Latest Articles"
+                    class="w-64 md:w-80 transform transition duration-500 hover:scale-105 hover:rotate-1"
+                />
             </div>
-          </section>
-          
-          <div class="w-full overflow-hidden leading-none animate-wave-fade">
-    <svg class="w-full h-24 md:h-32" viewBox="0 0 1440 320" preserveAspectRatio="none">
-        <defs>
-            <linearGradient id="aboutArticleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#C5F1FC" />
-                <stop offset="100%" stop-color="#A8E7FF" />
-            </linearGradient>
-        </defs>
-        <path fill="url(#aboutArticleGradient)" d="M0,160 C480,240 960,80 1440,160 L1440,320 L0,320 Z" />
-    </svg>
-</div>
-        
-
-
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                  <div>
+                      <h2 class="text-2xl font-bold text-center mb-4 font-display text-gray-700">Core Competencies</h2>
+                      <div class="chart-container">
+                          <canvas id="skillsRadarChart"></canvas>
+                      </div>
+                  </div>
+                  <div>
+                      <h3 class="text-2xl font-bold text-center mb-4 font-display text-gray-700">Tool & Technology Proficiency</h3>
+                       <div class="chart-container">
+                          <canvas id="skillsBarChart"></canvas>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+        <!-- Contact Section -->
         <section id="contact-section" class="relative overflow-hidden text-gray-900 pt-0 pb-20 px-4 bg-gradient-to-br from-sky-50 via-white to-sky-100">
-
             <!-- Background Bubbles (statique, sans animation) -->
             <div class="absolute inset-0 z-0 pointer-events-none">
               <div class="absolute w-96 h-96 bg-[#00AED3]/20 rounded-full -top-40 -left-40"></div>
@@ -554,12 +390,13 @@
                 <h2 class="text-3xl md:text-4xl font-extrabold text-[#00AED3] mb-4">Entrons en contact !</h2>
           
                 <p class="text-base md:text-lg text-gray-600 mb-10">
-                  Vous avez un projet, une question ou simplement envie d’échanger ? N'hésitez pas à me laisser un message ci-dessous. Je vous répondrai dans les plus brefs délais !
+                  Vous avez un projet, une question ou simplement envie d'échanger ? N'hésitez pas à me laisser un message ci-dessous. Je vous répondrai dans les plus brefs délais !
                 </p>
               </div>
             </div>
           
-            <form class="space-y-5 text-left max-w-xl mx-auto px-4">                <div>
+            <form class="space-y-5 text-left max-w-xl mx-auto px-4">
+                <div>
                 <label for="name" class="block text-sm font-semibold mb-1 text-[#00AED3]">Votre Nom</label>
                 <input type="text" id="name" placeholder="Votre Nom" required
                   class="w-full p-3 rounded-lg border border-[#00AED3]/40 bg-white placeholder-sky-400 focus:outline-none focus:ring-2 focus:ring-[#00AED3] transition duration-300 hover:shadow-md hover:bg-sky-50" />
@@ -575,23 +412,21 @@
                   class="w-full p-3 rounded-lg border border-[#00AED3]/40 bg-white placeholder-sky-400 focus:outline-none focus:ring-2 focus:ring-[#00AED3] transition duration-300 hover:shadow-md hover:bg-sky-50"></textarea>
               </div>
           
-             <!-- Button HTML -->
-<button type="submit"
-  class="relative inline-flex items-center justify-center w-full px-8 py-3 rounded-full font-semibold text-lg tracking-wide text-white overflow-hidden bg-gradient-to-r from-[#0f766e] via-[#06b6d4] to-[#38bdf8] shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 group">
-
-  <!-- Shine effect on hover -->
-  <span class="absolute inset-0 bg-white opacity-10 group-hover:animate-shine"></span>
-
-  <!-- Content -->
-  <span class="relative z-10 flex items-center gap-2">
-    ✉️ <span>Envoyer le message</span>
-  </span>
-</button>
+              <button type="submit" class="flex items-center justify-center mx-auto px-8 py-3 rounded-full bg-gradient-to-r from-[#00AED3] to-sky-600 text-white font-semibold hover:from-sky-600 hover:to-[#00AED3] transition-all duration-300 transform hover:scale-105 hover:shadow-lg relative overflow-hidden">
+                <div class="icon-wrapper transition-all duration-300 absolute inset-0 flex items-center justify-center opacity-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill="none" d="M0 0h24v24H0z"/>
+                    <path d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"/>
+                  </svg>
+                </div>
+                <span class="inline-block transition-all duration-300">Envoyer</span>
+              </button>
+              
+          
               <p class="text-sm text-gray-500 mt-4">
                 En soumettant ce formulaire, vous acceptez que vos données soient utilisées pour répondre à votre demande. Consultez notre <a href="#" class="text-sky-600 hover:underline">Politique de Confidentialité</a> pour plus d'informations.
               </p>
             </form>
-        </section>
           
             <div class="mt-12 flex justify-center space-x-8">
               <a href="#" target="_blank" rel="noopener noreferrer"
@@ -607,87 +442,102 @@
                 </svg>
               </a>
             </div>
-          </section>
-          
-          
-          <footer class="py-6 text-center bg-gray-900 text-gray-400" role="contentinfo">
-            <p class="text-sm">&copy; 2025 Mohamed Slimani</p>
-            <div class="flex space-x-4 justify-center mt-6">
-    <!-- Facebook -->
-    <a href="https://facebook.com" target="_blank" class="text-gray-500 hover:text-blue-600 transition-colors duration-300">
-        <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
-            <path d="M22 12a10 10 0 10-11.5 9.9v-7h-2v-2.9h2v-2.2c0-2 1.2-3.1 3-3.1.9 0 1.9.2 1.9.2v2.1h-1.1c-1 0-1.3.6-1.3 1.2v1.8h2.3l-.4 2.9h-1.9v7A10 10 0 0022 12z" />
-        </svg>
-    </a>
-    
-    <!-- Twitter -->
-    <a href="https://twitter.com" target="_blank" class="text-gray-500 hover:text-sky-500 transition-colors duration-300">
-        <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
-            <path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0022.4.36a9.14 9.14 0 01-2.89 1.1A4.48 4.48 0 0016.1 0c-2.5 0-4.5 2.2-4.5 4.9 0 .38.04.75.12 1.1A12.66 12.66 0 013 1.1a4.88 4.88 0 001.4 6.6A4.2 4.2 0 012 6.3v.06c0 2.2 1.5 4 3.6 4.4a4.42 4.42 0 01-2 .08 4.5 4.5 0 004.2 3.1A9.07 9.07 0 012 19.5a12.77 12.77 0 006.29 1.8c7.55 0 11.68-6.6 11.68-12.3 0-.2 0-.4-.01-.6A8.46 8.46 0 0023 3z" />
-        </svg>
-    </a>
-    
-    <!-- LinkedIn -->
-    <a href="https://linkedin.com" target="_blank" class="text-gray-500 hover:text-blue-700 transition-colors duration-300">
-        <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
-            <path d="M4.98 3.5C3.34 3.5 2 4.84 2 6.48s1.34 2.98 2.98 2.98c1.64 0 2.98-1.34 2.98-2.98S6.62 3.5 4.98 3.5zM2.4 21.5h5.2v-12H2.4v12zM9.34 9.5h4.98v1.71h.07c.69-1.25 2.38-2.57 4.9-2.57 5.24 0 6.2 3.45 6.2 7.94v7.42h-5.2v-6.58c0-1.57-.03-3.6-2.19-3.6-2.2 0-2.54 1.72-2.54 3.49v6.69h-5.2v-12z" />
-        </svg>
-    </a>
-    
-    <!-- GitHub -->
-    <a href="https://github.com" target="_blank" class="text-gray-500 hover:text-black transition-colors duration-300">
-        <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
-            <path d="M12 .5C5.8.5.5 5.8.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.6-1.6-1.3-2-1.3-2-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.5-.3-5-1.2-5-5.4 0-1.2.4-2.2 1.1-3-.1-.3-.5-1.5.1-3.2 0 0 .9-.3 3 .9a10.5 10.5 0 015.4 0c2-.9 3-.9 3-.9.6 1.7.2 2.9.1 3.2.7.8 1.1 1.9 1.1 3 0 4.2-2.5 5-5 5.3.4.3.8 1 .8 2v3c0 .3.2.7.8.6A10.6 10.6 0 0023.5 12c0-6.2-5.3-11.5-11.5-11.5z" />
-        </svg>
-    </a>
-</div>
-          </footer>
-          <script>
-            document.addEventListener("DOMContentLoaded", () => {
-              const target = document.getElementById("separatorContainer");
-          
-              const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                  if (entry.isIntersecting) {
-                    const img = target.querySelector("/assets/images/sep1stop.png");
-          
-                    // Reset opacity (fade in effect)
-                    target.classList.remove("opacity-0");
-                    target.classList.add("opacity-100");
-          
-                    // Restart the GIF by replacing it
-                    const newImg = img.cloneNode(true);
-                    img.parentNode.replaceChild(newImg, img);
-                  }
-                });
-              }, { threshold: 0.2 });
-          
-              if (target) observer.observe(target);
-            });
-          </script>
-          <script src="/assets/js/main.js"></script>
-          <script>
-            tailwind.config = {
-              theme: {
-                extend: {
-                  animation: {
-                    'pulse-slow': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    'pulse-slower': 'pulse 12s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                  }
-                }
-              }
-            }
-          </script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-         <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-        <script>
-    AOS.init({
-        duration: 800,
-        once: true,
-        easing: 'ease-out'
-    });
-</script>
+        </section>
 
+        <!-- Footer -->
+        <footer class="bg-stone-800 text-stone-100 py-8 text-center text-sm">
+            <p>&copy; 2025 Mohamed Slimani. All rights reserved.</p>
+            <div class="mt-2 space-x-4">
+                <a href="#" class="hover:underline">LinkedIn</a>
+                <a href="#" class="hover:underline">GitHub</a>
+                <a href="#" class="hover:underline">Email</a>
+            </div>
+        </footer>
     </main>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'pulse-slow': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'pulse-slower': 'pulse 12s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+    <script>
+      document.getElementById("show-works-btn").addEventListener("click", () => {
+        const worksSection = document.getElementById("works-section");
+        worksSection.classList.remove("hidden", "opacity-0");
+        worksSection.classList.add("block", "opacity-100");
+        worksSection.scrollIntoView({ behavior: "smooth" });
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      // Radar Chart
+      const radarCtx = document.getElementById('skillsRadarChart').getContext('2d');
+      new Chart(radarCtx, {
+        type: 'radar',
+        data: {
+          labels: ['Frontend Dev', 'Backend Dev', 'UI/UX Design', 'Database Mgt.', 'DevOps'],
+          datasets: [{
+            label: 'Skill Level',
+            data: [95, 75, 85, 70, 60],
+            fill: true,
+            backgroundColor: 'rgba(14, 116, 144, 0.2)',
+            borderColor: '#0e7490',
+            pointBackgroundColor: '#0e7490'
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            r: {
+              angleLines: { color: '#e5e7eb' },
+              grid: { color: '#f3f4f6' },
+              pointLabels: { color: '#111827', font: { size: 14 } },
+              ticks: { display: false }
+            }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    
+      // Bar Chart
+      const barCtx = document.getElementById('skillsBarChart').getContext('2d');
+      new Chart(barCtx, {
+        type: 'bar',
+        data: {
+          labels: ['React', 'Node.js', 'Python', 'Figma', 'Adobe XD', 'Git'],
+          datasets: [{
+            label: 'Proficiency',
+            data: [95, 80, 70, 85, 80, 75],
+            backgroundColor: 'rgba(14, 116, 144, 0.6)',
+            borderRadius: 6,
+            barPercentage: 0.7
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          scales: {
+            x: { beginAtZero: true, max: 100 },
+            y: { ticks: { color: '#1f2937', font: { size: 14 } } }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    </script>
+    
+    
+    
 </body>
-</html>
+</html> 
