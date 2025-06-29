@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Hero Section Animations (initial page load) ---
     // Apply initial fade-in-up for hero elements
     gsap.from("#hero p.tracking-widest", { opacity: 0, y: 30, duration: 0.8, ease: "power2.out" });
-    gsap.from("#hero .w-16.h-0\\.5", { opacity: 0, y: 30, duration: 0.8, ease: "power2.out", delay: 0.1 });
+    gsap.from("#hero .w-16.h-0.5", { opacity: 0, y: 30, duration: 0.8, ease: "power2.out", delay: 0.1 });
     gsap.from("#hero .gsap-zoom-in", { opacity: 0, scale: 0.8, duration: 1.2, ease: "back.out(1.7)", delay: 0.2 });
     gsap.from("#hero-title", { opacity: 0, y: 30, duration: 0.8, ease: "power2.out", delay: 0.3 });
     gsap.from("#hero-subtitle", { opacity: 0, y: 30, duration: 0.8, ease: "power2.out", delay: 0.4 });
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- General GSAP Animations on Scroll for .gsap-fade-in-up, .gsap-zoom-in, .gsap-fade-in-left ---
-    gsap.utils.toArray('.gsap-fade-in-up:not(#hero p.tracking-widest, #hero .w-16.h-0\\.5, #hero-title, #hero-subtitle, #hero-button)').forEach(element => {
+    gsap.utils.toArray('.gsap-fade-in-up:not(#hero p.tracking-widest, #hero .w-16.h-0.5, #hero-title, #hero-subtitle, #hero-button)').forEach(element => {
         gsap.from(element, {
             opacity: 0,
             y: 50,
@@ -109,48 +109,61 @@ document.addEventListener('DOMContentLoaded', () => {
     const allNavLinks = document.querySelectorAll('.nav-link');
     const allCollapsibleSections = document.querySelectorAll('.collapsible-section');
     const heroSection = document.getElementById('hero');
+    const worksPlaceholder = document.getElementById('works-section-placeholder');
+    const btnText = document.getElementById('works-button-text');
+    const btnIcon = document.getElementById('works-button-icon');
+    let isVisible = false;
 
-
-    // Helper to hide all collapsible sections
-    const hideAllCollapsible = (excludeSection = null) => {
-        allCollapsibleSections.forEach(section => {
-            if (section !== excludeSection) {
-                section.classList.remove('visible');
-                section.classList.add('hidden'); // Ensure 'hidden' is applied
-            }
-        });
-    };
-
-// In the toggleSectionVisibility function, replace with:
-const toggleSectionVisibility = (sectionElement, scrollIntoView = true) => {
-    // Hide all others
-    hideAllCollapsible(sectionElement);
-
-    // Toggle visibility
-    if (sectionElement.classList.contains('visible')) {
-        sectionElement.classList.remove('visible');
-        sectionElement.classList.add('hidden');
-    } else {
-        sectionElement.classList.remove('hidden');
-        void sectionElement.offsetWidth; // Force reflow
-        sectionElement.classList.add('visible');
-        
-        if (scrollIntoView) {
-            setTimeout(() => {
-                sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 50);
-        }
-    }
-};
-
-    // "VIEW MY WORKS" button click
+    
     if (showWorksBtn && worksSection) {
         showWorksBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            toggleSectionVisibility(worksSection);
+          e.preventDefault();
+          isVisible = !isVisible;
+      
+          // Update button text and icon
+          btnText.textContent = isVisible ? 'HIDE WORKS' : 'VIEW MY WORKS';
+          btnIcon.innerHTML = isVisible
+            ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />`
+            : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />`;
+      
+          // Toggle visibility
+          if (isVisible) {
+            // Calculate needed height (adjust based on your content)
+            const sectionHeight = worksSection.scrollHeight;
+            worksPlaceholder.style.height = `${sectionHeight}px`;
+            
+            worksSection.classList.remove('opacity-0', 'scale-y-0', 'pointer-events-none');
+            worksSection.classList.add('opacity-100');
+          } else {
+            worksPlaceholder.style.height = '0';
+            
+            worksSection.classList.add('opacity-0', 'scale-y-0', 'pointer-events-none');
+            worksSection.classList.remove('opacity-100');
+          }
+      
+          // Smooth scroll to the section
+          setTimeout(() => {
+            worksSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
         });
     }
-
+    // Function to toggle visibility of sections
+    function toggleSectionVisibility(section) {
+        if (section.classList.contains('hidden')) {
+            section.classList.remove('hidden');
+            section.classList.add('visible');
+        } else {
+            section.classList.remove('visible');
+            section.classList.add('hidden');
+        }
+    }
+    // Function to hide all collapsible sections
+    function hideAllCollapsible() {
+        allCollapsibleSections.forEach(section => {
+            section.classList.remove('visible');
+            section.classList.add('hidden');
+        });
+    }
     // Design Panel click
     if (designPanel && designPortfolioContent) {
         designPanel.addEventListener('click', () => {
